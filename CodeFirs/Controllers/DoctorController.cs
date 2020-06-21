@@ -26,7 +26,7 @@ namespace CodeFirs.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateDoctor(Doctor doctor)
+        public IActionResult UpdateDoctor([FromBody] Doctor doctor)
         {
             var d1 = _myDBContext.Doctor.Find(doctor.IdDoctor);
             d1.LastName = doctor.LastName;
@@ -37,25 +37,23 @@ namespace CodeFirs.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddDoctor(Doctor doctor)
+        public IActionResult AddDoctor([FromBody] Doctor doctor)
         {
             _myDBContext.Doctor.Add(doctor);
             _myDBContext.SaveChanges();
             return Ok();
         }
 
-        [HttpDelete]
-        public IActionResult DeleteDoctor()
+        [HttpDelete("{id}"]
+        public IActionResult DeleteDoctor([FromRoute]int id)
         {
             var d = new Doctor
             {
-                IdDoctor = 6
+                IdDoctor = id
             }; 
             
             _myDBContext.Attach(d);
             _myDBContext.Remove(d);
-
-
             _myDBContext.SaveChanges();
             return Ok();
         }
