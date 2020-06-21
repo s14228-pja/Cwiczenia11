@@ -28,6 +28,13 @@ namespace CodeFirs.Models
             modelBuilder.Entity<Prescription_Medicament>()
                          .HasKey(e => new { e.IdMedicament, e.IdPrescription });
 
+            var dictDoctor = new List<Doctor>();
+            dictDoctor.Add(new Doctor {IdDoctor = 123, FirstName = "Jan", LastName = "Okoń" });
+            dictDoctor.Add(new Doctor { IdDoctor = 124, FirstName = "Adam", LastName = "Biwak" });
+
+            modelBuilder.Entity<Doctor>()
+                        .HasData(dictDoctor);
+
         }
     }
 }
